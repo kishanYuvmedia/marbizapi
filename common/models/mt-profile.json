@@ -1,0 +1,108 @@
+{
+  "name": "MtProfile",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "strictObjectIDCoercion": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "regName": {
+      "type": "string",
+      "required": true
+    },
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "array"
+    },
+    "tag": {
+      "type": "array"
+    },
+    "businessNumber": {
+      "type": "string"
+    },
+    "about": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string"
+    },
+    "businessEmail": {
+      "type": "string",
+      "required": true
+    },
+    "coverImage": {
+      "type": "string"
+    },
+    "portfolio": {
+      "type": "array"
+    },
+    "createdAt": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "idProofType": {
+      "type": "string"
+    },
+    "idProofNo": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "I"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {
+    "getUniqueLocations": {
+      "accepts": [
+        {
+          "arg": "categoryType",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "state",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "arg": "response",
+        "root": true
+      },
+      "description": "",
+      "http": [
+        {
+          "path": "/getUniqueLocations",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}
